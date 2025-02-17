@@ -2,7 +2,7 @@
 
 namespace AuthKit.Domain.DashbaordAggregate
 {
-    public interface IDashboardUserRepositories : IRepository<DashboardUser, Guid>
+    public interface IDashboardUserRepository : IRepository<DashboardUser, Guid>
     {
     }
 }

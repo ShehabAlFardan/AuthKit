@@ -2,7 +2,7 @@
 
 namespace AuthKit.Domain.UserAggregate
 {
-    interface IUserAggregate : IRepository<User, Guid>
+    public interface IUserRepository : IRepository<User, Guid>
     {
     }
 }

@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AuthKit.Infrastructure.Persistance.UserAggregate
+namespace AuthKit.Infrastructure.Persistance.UserAggregate.EntityConfigurations
 {
     class UserEntityTypeConfiguration : IEntityTypeConfiguration<User>
     {

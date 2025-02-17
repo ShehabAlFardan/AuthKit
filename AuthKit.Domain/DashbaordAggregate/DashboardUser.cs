@@ -16,7 +16,7 @@ namespace AuthKit.Domain.DashbaordAggregate
         public string Name => _name;
         public string Email => _email;
         public string Password => _password;
-        public List<Application> Applications => _applications;
+        public IReadOnlyCollection<Application> Applications => _applications;
         public DateTime CreatedAt => _createdAt;
         public DateTime? UpdatedAt => _updatedAt;
 

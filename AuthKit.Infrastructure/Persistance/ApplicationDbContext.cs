@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AuthKit.Infrastructure.Persistance
 {
-    class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         public DbSet<Application> Applications { get; set; }
         public DbSet<DashboardUser> DashboardUsers { get; set; }

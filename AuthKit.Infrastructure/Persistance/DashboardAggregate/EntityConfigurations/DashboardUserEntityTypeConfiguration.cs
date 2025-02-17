@@ -14,7 +14,6 @@ namespace AuthKit.Infrastructure.Persistance.DashboardAggregate.EntityConfigurat
             builder.Property(x => x.Name).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.Email).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.Password).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
-            builder.Property(x => x.Applications).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.CreatedAt).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.UpdatedAt).UsePropertyAccessMode(PropertyAccessMode.Field);
         }

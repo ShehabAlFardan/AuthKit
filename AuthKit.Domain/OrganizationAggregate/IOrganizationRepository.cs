@@ -2,7 +2,7 @@
 
 namespace AuthKit.Domain.OrganizationAggregate
 {
-    interface IOrganizationRepository : IRepository<Organization, Guid>
+    public interface IOrganizationRepository : IRepository<Organization, Guid>
     {
     }
 }
