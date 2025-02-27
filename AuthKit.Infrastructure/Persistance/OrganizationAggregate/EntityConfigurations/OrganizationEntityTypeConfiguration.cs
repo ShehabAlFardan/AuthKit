@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthKit.Infrastructure.Persistance.OrganizationAggregate
+namespace AuthKit.Infrastructure.Persistance.OrganizationAggregate.EntityConfigurations
 {
     class OrganizationEntityTypeConfiguration : IEntityTypeConfiguration<Organization>
     {

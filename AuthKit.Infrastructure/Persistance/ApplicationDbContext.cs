@@ -1,18 +1,18 @@
-﻿using AuthKit.Domain.ApplicationAggregate;
-using AuthKit.Domain.DashbaordAggregate;
-using AuthKit.Domain.OrganizationAggregate;
-using AuthKit.Domain.UserAggregate;
-using AuthKit.Infrastructure.Persistance.ApplicationAggregate.EntityConfigurations;
+﻿using AuthKit.Infrastructure.Persistance.ApplicationAggregate.EntityConfigurations;
 using AuthKit.Infrastructure.Persistance.DashboardAggregate.EntityConfigurations;
-using AuthKit.Infrastructure.Persistance.OrganizationAggregate;
-using AuthKit.Infrastructure.Persistance.UserAggregate;
+using AuthKit.Infrastructure.Persistance.OrganizationAggregate.EntityConfigurations;
+using AuthKit.Infrastructure.Persistance.UserAggregate.EntityConfigurations;
 using Microsoft.EntityFrameworkCore;
+using AuthKit.Domain.ApplicationAggregate;
+using AuthKit.Domain.OrganizationAggregate;
+using AuthKit.Domain.DashbaordAggregate;
+using AuthKit.Domain.UserAggregate;
 
 namespace AuthKit.Infrastructure.Persistance
 {
     public class ApplicationDbContext : DbContext
     {
-        public DbSet<Application> Applications { get; set; }
+        public DbSet<Domain.ApplicationAggregate.Application> Applications { get; set; }
         public DbSet<DashboardUser> DashboardUsers { get; set; }
         public DbSet<Organization> Organizations { get; set; }
         public DbSet<User> Users { get; set; }

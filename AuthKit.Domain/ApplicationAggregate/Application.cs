@@ -1,16 +1,19 @@
-﻿using AuthKit.Domain.Kernal;
+﻿using AuthKit.Domain.DashbaordAggregate;
+using AuthKit.Domain.Kernal;
 
 namespace AuthKit.Domain.ApplicationAggregate
 {
     public class Application
     {
         private Guid _id;
+        private Guid _dashboardUserId;
         private string _name;
         private ApplicationTypeEnum _applicationType;
         private DateTime _createdAt;
         private DateTime? _updatedAt;
 
         public Guid Id => _id;
+        public Guid DashboardUserId => _dashboardUserId;
         public string Name => _name;
         public ApplicationTypeEnum ApplicationType => _applicationType;
         public DateTime CreatedAt => _createdAt;

@@ -3,9 +3,9 @@ using AuthKit.Infrastructure.Repositories;
 
 namespace AuthKit.Infrastructure.Persistance.DashboardAggregate.Repositories
 {
-    class DashboardUserRepository : EfRepository<ApplicationDbContext, DashboardUser, Guid>, IDashboardUserRepository
+    public class DashboardUserEfRepository : EfRepository<ApplicationDbContext, DashboardUser, Guid>, IDashboardUserRepository
     {
-        public DashboardUserRepository(ApplicationDbContext dbContext) : base(dbContext, true)
+        public DashboardUserEfRepository(ApplicationDbContext dbContext) : base(dbContext, true)
         {
 
         }
