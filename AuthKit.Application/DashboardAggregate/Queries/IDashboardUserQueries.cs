@@ -10,6 +10,7 @@ namespace AuthKit.Application.DashboardAggregate.Queries
     public interface IDashboardUserQueries
     {
         public Task<DashboardUser?> GetDashboardUserByEmail(string email);
+        public Task<DashboardUser?> GetDashboardUserById(Guid Id);
 
     }
 }

@@ -55,7 +55,7 @@ namespace AuthKit.Domain.DashbaordAggregate
 
         public Application CreateApplication(string applicatioName, ApplicationTypeEnum applicationType)
         {
-            var newApplication = new Application(applicatioName, applicationType);
+            var newApplication = new Application(applicatioName, applicationType, _id);
 
             if (_applications == null)
             {

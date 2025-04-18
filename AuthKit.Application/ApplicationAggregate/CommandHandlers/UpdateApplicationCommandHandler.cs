@@ -1,5 +1,6 @@
 ﻿using AuthKit.Application.ApplicationAggregate.Commands;
 using AuthKit.Application.ApplicationAggregate.Dtos;
+using AuthKit.Application.ApplicationAggregate.Queries;
 using AuthKit.Application.ApplicationAggregate.Validations;
 using AuthKit.Application.DashboardAggregate.Queries;
 using AuthKit.Application.Exceptions;
@@ -7,25 +8,24 @@ using AuthKit.Domain.ApplicationAggregate;
 using AuthKit.Domain.DashbaordAggregate;
 using MediatR;
 
-
 namespace AuthKit.Application.ApplicationAggregate.CommandHandlers
 {
-    public class CreateApplicationCommandHandler : IRequestHandler<CreateApplicationCommand, CreateApplicationResponse>
+    public class UpdateApplicationCommandHandler : IRequestHandler<UpdateApplicationCommand, UpdateApplicationResponse>
     {
         private readonly IApplicationRepository _applicationRepository;
-        private readonly ICreateApplicationCommandValidator _commandValidator;
-        private readonly IDashboardUserQueries _dashboardUserQueries;
-        public CreateApplicationCommandHandler(IApplicationRepository applicationRepository, 
-            ICreateApplicationCommandValidator commandValidator, 
+        private readonly IUpdateApplicationCommandValidator _commandValidator;
+        private readonly IApplicationQueries _applicationQueries;
+        public UpdateApplicationCommandHandler(IApplicationRepository applicationRepository,
+            IUpdateApplicationCommandValidator commandValidator,
             IDashboardUserRepository dashboardUserRepository,
-            IDashboardUserQueries dashboardUserQueries)
+            IApplicationQueries applicationQueries)
         {
             _applicationRepository = applicationRepository;
             _commandValidator = commandValidator;
-            _dashboardUserQueries = dashboardUserQueries;
+            _applicationQueries = applicationQueries;
         }
 
-        public async Task<CreateApplicationResponse> Handle(CreateApplicationCommand command, CancellationToken cancellationToken)
+        public async Task<UpdateApplicationResponse> Handle(UpdateApplicationCommand command, CancellationToken cancellationToken)
         {
             var validationResult = await _commandValidator.ValidateAsync(command);
 
@@ -34,18 +34,18 @@ namespace AuthKit.Application.ApplicationAggregate.CommandHandlers
                 throw new ValidationException(validationResult.Errors);
             }
 
-            var user = await _dashboardUserQueries.GetDashboardUserById(command.UserId);
+            var application = await _applicationQueries.GetApplicationById(command.ApplicationId, command.DashboardUserId);
 
-            if (user == null)
+            if (application == null)
             {
-                throw new Exception($"User with ID {command.UserId} not found.");
+                throw new Exception($"Application with ID {command.ApplicationId} not found.");
             }
 
-            var application = user.CreateApplication(command.Name, command.ApplicationType);
+            application.UpdateApplication(command.Name, command.ApplicationType);
 
-            await _applicationRepository.InsertAsync(application);
+            await _applicationRepository.UpdateAsync(application);
 
-            var response = new CreateApplicationResponse
+            var response = new UpdateApplicationResponse
             {
                 Id = application.Id,
                 Name = application.Name,
@@ -53,6 +53,7 @@ namespace AuthKit.Application.ApplicationAggregate.CommandHandlers
             };
 
             return response;
+
         }
     }
 }

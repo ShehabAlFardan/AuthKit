@@ -1,4 +1,5 @@
 using AuthKit.API.Middlewares;
+using AuthKit.Application.ApplicationAggregate.Queries;
 using AuthKit.Application.ApplicationAggregate.Validations;
 using AuthKit.Application.DashboardAggregate.Commands;
 using AuthKit.Application.DashboardAggregate.Queries;
@@ -11,6 +12,7 @@ using AuthKit.Domain.UserAggregate;
 using AuthKit.Infrastructure.Integration.DashboardAggregate.JWT;
 using AuthKit.Infrastructure.Integration.DashboardAggregate.JWT.Services;
 using AuthKit.Infrastructure.Persistance;
+using AuthKit.Infrastructure.Persistance.ApplicationAggregate.Queries;
 using AuthKit.Infrastructure.Persistance.ApplicationAggregate.Repositories;
 using AuthKit.Infrastructure.Persistance.DashboardAggregate.Queries;
 using AuthKit.Infrastructure.Persistance.DashboardAggregate.Repositories;
@@ -33,6 +35,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<IApplicationRepository, ApplicationEfRepository>();
 builder.Services.AddScoped<ICreateApplicationCommandValidator, CreateApplicationFluentValidator>();
+builder.Services.AddScoped<IUpdateApplicationCommandValidator, UpdateApplicationFluentValidator>();
+builder.Services.AddScoped<IDeleteApplicationCommandValidator, DeleteApplicationFluentValidator>();
+builder.Services.AddScoped<IApplicationQueries, ApplicationQueries>();
 #endregion
 
 #region DashboardAggregate

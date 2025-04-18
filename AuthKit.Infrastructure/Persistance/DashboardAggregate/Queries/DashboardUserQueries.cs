@@ -18,5 +18,15 @@ namespace AuthKit.Infrastructure.Persistance.DashboardAggregate.Queries
 
             return dashboardUser;
         }
+
+        public async Task<DashboardUser> GetDashboardUserById(Guid Id)
+        {
+            var dashboardUser = await _applicationDbContext.DashboardUsers
+                    .Include(user => user.Applications)
+                    .Where(user => user.Id == Id)
+                    .FirstOrDefaultAsync();
+
+            return dashboardUser;
+        }
     }
 }

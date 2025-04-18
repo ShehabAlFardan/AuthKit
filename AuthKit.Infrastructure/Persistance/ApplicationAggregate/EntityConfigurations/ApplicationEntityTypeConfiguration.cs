@@ -1,4 +1,4 @@
-﻿using AuthKit.Domain.ApplicationAggregate;
+﻿using AuthKit.Domain.DashbaordAggregate;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,10 +10,16 @@ namespace AuthKit.Infrastructure.Persistance.ApplicationAggregate.EntityConfigur
         {
             builder.ToTable("Applications");
             builder.Property(x => x.Id).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+            builder.Property(x => x.DashboardUserId).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.Name).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.ApplicationType).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.CreatedAt).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.UpdatedAt).UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            builder.HasOne<DashboardUser>()
+            .WithMany() 
+            .HasForeignKey(x => x.DashboardUserId)
+            .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

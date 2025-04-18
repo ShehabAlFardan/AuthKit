@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthKit.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250227080815_removing realtion")]
-    partial class removingrealtion
+    [Migration("20250324071828_AddUserAndOrganiztionConfigurations")]
+    partial class AddUserAndOrganiztionConfigurations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,9 @@ namespace AuthKit.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("DashboardUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("DashboardUserId1")
                         .HasColumnType("uniqueidentifier");
 
@@ -48,6 +51,8 @@ namespace AuthKit.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DashboardUserId");
 
                     b.HasIndex("DashboardUserId1");
 
@@ -89,6 +94,9 @@ namespace AuthKit.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ApplicationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -110,6 +118,9 @@ namespace AuthKit.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ApplicationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -125,6 +136,10 @@ namespace AuthKit.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("OrganizationId")
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -139,6 +154,12 @@ namespace AuthKit.Infrastructure.Migrations
 
             modelBuilder.Entity("AuthKit.Domain.ApplicationAggregate.Application", b =>
                 {
+                    b.HasOne("AuthKit.Domain.DashbaordAggregate.DashboardUser", null)
+                        .WithMany()
+                        .HasForeignKey("DashboardUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AuthKit.Domain.DashbaordAggregate.DashboardUser", null)
                         .WithMany("Applications")
                         .HasForeignKey("DashboardUserId1");

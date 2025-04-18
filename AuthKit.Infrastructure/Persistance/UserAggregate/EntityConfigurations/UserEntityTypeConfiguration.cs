@@ -13,6 +13,8 @@ namespace AuthKit.Infrastructure.Persistance.UserAggregate.EntityConfigurations
             builder.Property(x => x.LastName).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.Email).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.Password).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+            builder.Property(x => x.ApplicationId).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+            builder.Property(x => x.OrganizationId).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.CreatedAt).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.UpdatedAt).UsePropertyAccessMode(PropertyAccessMode.Field);
         }

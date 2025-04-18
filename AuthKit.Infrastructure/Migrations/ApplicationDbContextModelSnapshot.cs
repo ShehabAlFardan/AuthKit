@@ -34,6 +34,9 @@ namespace AuthKit.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid>("DashboardUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<Guid?>("DashboardUserId1")
                         .HasColumnType("uniqueidentifier");
 
@@ -45,6 +48,8 @@ namespace AuthKit.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DashboardUserId");
 
                     b.HasIndex("DashboardUserId1");
 
@@ -86,6 +91,9 @@ namespace AuthKit.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ApplicationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -107,6 +115,9 @@ namespace AuthKit.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid>("ApplicationId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -122,6 +133,10 @@ namespace AuthKit.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("OrganizationId")
+                        .IsRequired()
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -136,6 +151,12 @@ namespace AuthKit.Infrastructure.Migrations
 
             modelBuilder.Entity("AuthKit.Domain.ApplicationAggregate.Application", b =>
                 {
+                    b.HasOne("AuthKit.Domain.DashbaordAggregate.DashboardUser", null)
+                        .WithMany()
+                        .HasForeignKey("DashboardUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AuthKit.Domain.DashbaordAggregate.DashboardUser", null)
                         .WithMany("Applications")
                         .HasForeignKey("DashboardUserId1");

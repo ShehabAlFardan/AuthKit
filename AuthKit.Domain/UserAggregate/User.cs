@@ -7,6 +7,8 @@
         private string _lastName;
         private string _email;
         private string _password;
+        private Guid _applicationId;
+        private Guid? _organizationId;
         private DateTime _createdAt;
         private DateTime? _updatedAt;
 
@@ -15,6 +17,8 @@
         public string LastName => _lastName;
         public string Email => _email;
         public string Password => _password;
+        public Guid ApplicationId => _applicationId;
+        public Guid? OrganizationId => _organizationId;
         public DateTime CreatedAt => _createdAt;
         public DateTime? UpdatedAt => _updatedAt;
 
@@ -23,13 +27,15 @@
             
         }
 
-        public User(string firstName, string lastName, string email, string password)
+        public User(string firstName, string lastName, string email, string password, Guid applicationId , Guid? organizationId)
         {
             _id = Guid.NewGuid();
             _firstName = firstName;
             _lastName = lastName;
             _email = email;
             _password = password;
+            _applicationId = applicationId;
+            _organizationId = organizationId;
             _createdAt = DateTime.UtcNow;
             _updatedAt = null;
         }

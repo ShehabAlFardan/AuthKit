@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AuthKit.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initMigration : Migration
+    public partial class inital : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -63,11 +63,12 @@ namespace AuthKit.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DashboardUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ApplicationType = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DashboardUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    DashboardUserId1 = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,6 +77,12 @@ namespace AuthKit.Infrastructure.Migrations
                         name: "FK_Applications_DashboardUsers_DashboardUserId",
                         column: x => x.DashboardUserId,
                         principalTable: "DashboardUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Applications_DashboardUsers_DashboardUserId1",
+                        column: x => x.DashboardUserId1,
+                        principalTable: "DashboardUsers",
                         principalColumn: "Id");
                 });
 
@@ -83,6 +90,11 @@ namespace AuthKit.Infrastructure.Migrations
                 name: "IX_Applications_DashboardUserId",
                 table: "Applications",
                 column: "DashboardUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_DashboardUserId1",
+                table: "Applications",
+                column: "DashboardUserId1");
         }
 
         /// <inheritdoc />

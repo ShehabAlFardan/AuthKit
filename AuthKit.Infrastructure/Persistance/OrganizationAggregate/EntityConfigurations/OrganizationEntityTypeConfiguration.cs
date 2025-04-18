@@ -15,10 +15,11 @@ namespace AuthKit.Infrastructure.Persistance.OrganizationAggregate.EntityConfigu
         {
             builder.ToTable("Organiztions");
             builder.Property(x => x.Id).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+            builder.Property(x => x.ApplicationId).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.Name).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+            builder.Property(x => x.CreatedBy).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.CreatedAt).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.UpdatedAt).UsePropertyAccessMode(PropertyAccessMode.Field);
-
         }
     }
 }

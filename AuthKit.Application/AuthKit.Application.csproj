@@ -17,4 +17,8 @@
     <ProjectReference Include="..\AuthKit.Domain\AuthKit.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="OrganizationAggregate\Queries\" />
+  </ItemGroup>
+
 </Project>

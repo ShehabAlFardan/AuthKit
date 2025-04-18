@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthKit.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250217132248_initMigration")]
-    partial class initMigration
+    [Migration("20250227133552_inital")]
+    partial class inital
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,10 @@ namespace AuthKit.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("DashboardUserId")
+                    b.Property<Guid>("DashboardUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("DashboardUserId1")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -50,6 +53,8 @@ namespace AuthKit.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DashboardUserId");
+
+                    b.HasIndex("DashboardUserId1");
 
                     b.ToTable("Applications", (string)null);
                 });
@@ -140,8 +145,14 @@ namespace AuthKit.Infrastructure.Migrations
             modelBuilder.Entity("AuthKit.Domain.ApplicationAggregate.Application", b =>
                 {
                     b.HasOne("AuthKit.Domain.DashbaordAggregate.DashboardUser", null)
+                        .WithMany()
+                        .HasForeignKey("DashboardUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("AuthKit.Domain.DashbaordAggregate.DashboardUser", null)
                         .WithMany("Applications")
-                        .HasForeignKey("DashboardUserId");
+                        .HasForeignKey("DashboardUserId1");
                 });
 
             modelBuilder.Entity("AuthKit.Domain.DashbaordAggregate.DashboardUser", b =>

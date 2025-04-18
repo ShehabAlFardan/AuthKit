@@ -24,13 +24,21 @@ namespace AuthKit.Domain.ApplicationAggregate
             
         }
 
-        public Application(string name, ApplicationTypeEnum applicationType)
+        public Application(string name, ApplicationTypeEnum applicationType, Guid userDashboardId)
         {
             _id = Guid.NewGuid();
+            _dashboardUserId = userDashboardId;
             _name = name;
             _applicationType = applicationType;
             _createdAt = DateTime.UtcNow;
             _updatedAt = null;
+        }
+
+        public void UpdateApplication(string name, ApplicationTypeEnum applicationType)
+        {
+            _name = name;
+            _applicationType = applicationType;
+            _updatedAt = DateTime.UtcNow;
         }
 
     }
