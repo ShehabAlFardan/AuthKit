@@ -24,6 +24,12 @@ namespace AuthKit.Application.OrganizationAggregate.CommandHandlers
                 throw new ValidationException(validationResult.Errors);
             }
 
+            return new CreateOrganizationResponse
+            {
+                Id = new Guid(),
+                Name = command.Name,
+                ApplicationId = command.ApplicationId,
+            };
 
         }
     }

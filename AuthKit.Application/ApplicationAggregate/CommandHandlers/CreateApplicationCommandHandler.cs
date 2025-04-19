@@ -1,4 +1,5 @@
-﻿using AuthKit.Application.ApplicationAggregate.Commands;
+﻿using System.Security.Cryptography;
+using AuthKit.Application.ApplicationAggregate.Commands;
 using AuthKit.Application.ApplicationAggregate.Dtos;
 using AuthKit.Application.ApplicationAggregate.Validations;
 using AuthKit.Application.DashboardAggregate.Queries;
@@ -41,7 +42,9 @@ namespace AuthKit.Application.ApplicationAggregate.CommandHandlers
                 throw new Exception($"User with ID {command.UserId} not found.");
             }
 
-            var application = user.CreateApplication(command.Name, command.ApplicationType);
+            var plainTextApiKey = GenerateApiKey();
+
+            var application = user.CreateApplication(command.Name, command.ApplicationType, plainTextApiKey);
 
             await _applicationRepository.InsertAsync(application);
 
@@ -49,10 +52,19 @@ namespace AuthKit.Application.ApplicationAggregate.CommandHandlers
             {
                 Id = application.Id,
                 Name = application.Name,
-                ApplicationType = application.ApplicationType
+                ApplicationType = application.ApplicationType,
+                ApiKey = plainTextApiKey
             };
 
             return response;
+        }
+
+        private static string GenerateApiKey()
+        {
+            using var rng = RandomNumberGenerator.Create();
+            var bytes = new byte[32];
+            rng.GetBytes(bytes);
+            return Convert.ToBase64String(bytes) + "-" + Guid.NewGuid().ToString("N");
         }
     }
 }

@@ -4,6 +4,7 @@ using AuthKit.Application.ApplicationAggregate.Validations;
 using AuthKit.Application.DashboardAggregate.Commands;
 using AuthKit.Application.DashboardAggregate.Queries;
 using AuthKit.Application.DashboardAggregate.Validations;
+using AuthKit.Application.OrganizationAggregate.Validations;
 using AuthKit.Application.Services;
 using AuthKit.Domain.ApplicationAggregate;
 using AuthKit.Domain.DashbaordAggregate;
@@ -20,6 +21,7 @@ using AuthKit.Infrastructure.Persistance.OrganizationAggregate.Repositories;
 using AuthKit.Infrastructure.Persistance.UserAggregate.Repositories;
 using AuthKit.Infrastructure.Validation.Fluent.ApplicationAggregate;
 using AuthKit.Infrastructure.Validation.Fluent.DashboardAggregate;
+using AuthKit.Infrastructure.Validation.Fluent.OragnizationAggregate;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +54,7 @@ builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSet
 #endregion
 
 #region OrganizationAggregate
+builder.Services.AddScoped<ICreateOrganizationCommandValidator, CreateOrganizationCommandFluentValidator>();
 
 builder.Services.AddScoped<IOrganizationRepository, OrganizationEfRepository>();
 

@@ -12,6 +12,7 @@ namespace AuthKit.Infrastructure.Persistance.ApplicationAggregate.EntityConfigur
             builder.Property(x => x.Id).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.DashboardUserId).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.Name).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
+            builder.Property(x => x.ApiKey).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.ApplicationType).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.CreatedAt).UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
             builder.Property(x => x.UpdatedAt).UsePropertyAccessMode(PropertyAccessMode.Field);

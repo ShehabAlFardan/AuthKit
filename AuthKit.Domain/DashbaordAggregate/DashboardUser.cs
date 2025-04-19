@@ -53,9 +53,9 @@ namespace AuthKit.Domain.DashbaordAggregate
             _updatedAt = DateTime.UtcNow;         
         }
 
-        public Application CreateApplication(string applicatioName, ApplicationTypeEnum applicationType)
+        public Application CreateApplication(string applicatioName, ApplicationTypeEnum applicationType, string plainTextApiKey)
         {
-            var newApplication = new Application(applicatioName, applicationType, _id);
+            var newApplication = new Application(applicatioName, applicationType, _id, plainTextApiKey);
 
             if (_applications == null)
             {
